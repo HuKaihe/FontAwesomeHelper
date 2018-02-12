@@ -4,7 +4,10 @@
   "description": "FontAwesomeHelper is a platform devoted to help people find and manage Font Awesome icons easily",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress --watch",
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -18,9 +21,11 @@
   "homepage": "https://github.com/HuKaihe/FontAwesomeHelper#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -31,11 +36,15 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "postcss-loader": "^2.1.0",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "classnames": "^2.2.5",
+    "clipboard-js": "^0.3.6",
     "font-awesome": "^4.7.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }

@@ -1,7 +1,274 @@
-body {
-  background: #b44545;
-  color: white;
+button,
+a {
+  outline: none;
+  border: none;
+  background: transparent;
 }
-body ul {
+ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
+html,
+body,
+.app,
+.container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  color: #252525;
+  font-weight: 300;
+}
+html *,
+body *,
+.app *,
+.container * {
+  box-sizing: border-box;
+}
+.quick-search {
+  padding: 10px 40px;
+  text-align: center;
+  position: relative;
+}
+.quick-search .search-icon {
+  position: absolute;
+  right: 50px;
+  top: 18px;
+}
+.text-input {
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  font-weight: 200;
+  outline: none;
+  border: none;
+}
+.left-menu {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 350px;
+  background-color: #F2F2F2;
+  overflow: auto;
+}
+.left-menu .site-title {
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+}
+.left-menu .site-title .sub-title {
+  font-size: 15px;
+  color: #666666;
+  margin-top: 10px;
+  font-weight: 200;
+}
+.left-menu .icon-collections {
+  list-style: none;
+  margin: 0;
+  padding: 20px 0;
+}
+.left-menu .icon-collections li {
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 300;
+}
+.left-menu .icon-collections li .icon {
+  margin-right: 10px;
+}
+.left-menu .icon-collections li .remove-collection {
+  display: none;
+  position: absolute;
+  left: 6px;
+  font-size: 13px;
+  bottom: 11px;
+  color: #666666;
+  cursor: pointer;
+}
+.left-menu .icon-collections li:hover,
+.left-menu .icon-collections li.active {
+  background: #e4e4e4;
+}
+.left-menu .icon-collections li:hover .remove-collection,
+.left-menu .icon-collections li.active .remove-collection {
+  display: inline-block;
+}
+.left-menu .no-new-collection .add-new-collection,
+.left-menu .no-rename .add-new-collection,
+.left-menu .no-new-collection .collection-intro,
+.left-menu .no-rename .collection-intro {
+  display: inline-block;
+}
+.left-menu .no-new-collection .new-collection-form,
+.left-menu .no-rename .new-collection-form {
+  display: none;
+}
+.left-menu .new-collection .add-new-collection,
+.left-menu .rename .add-new-collection,
+.left-menu .new-collection .collection-intro,
+.left-menu .rename .collection-intro {
+  display: none;
+}
+.left-menu .new-collection .new-collection-form,
+.left-menu .rename .new-collection-form {
+  padding: 10px 40px;
+  text-align: center;
+}
+.left-menu .new-collection .new-collection-input,
+.left-menu .rename .new-collection-input {
+  box-shadow: 2px 3px 5px grey;
+}
+.main-content {
+  height: 100%;
+  overflow: auto;
+  padding: 10px;
+}
+.main-content .top-block {
+  overflow: hidden;
+  padding: 10px;
+}
+.main-content .top-block .site-data {
+  display: none;
+  float: left;
+  font-size: 15px;
+  color: #e4e4e4;
+}
+.main-content .top-block .quick-search {
+  float: right;
+  width: 400px;
+  font-size: 20px;
+}
+.main-content .displayed-icon-group {
+  animation-duration: 0.5s;
+}
+.main-content .displayed-icon-group .group-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 30px;
+}
+.main-content .displayed-icon-group .group-title .collect-group {
+  border: none;
+  background: transparent;
+  margin-left: 30px;
+  font-size: 30px;
+  outline: none;
+  cursor: pointer;
+}
+.main-content .displayed-icon-group .group-title .collect-group:hover {
+  color: #8fbcce;
+}
+.main-content .displayed-icon-group .icon-showcase {
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+}
+.main-content .displayed-icon-group .icon-showcase > li {
+  cursor: pointer;
+  color: #666666;
+  display: inline-block;
+  width: 130px;
+  margin-right: 10px;
+  margin-top: 20px;
+  border: 1px solid #e4e4e4;
+  position: relative;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-remove {
+  display: none;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  color: #ffffff;
+  top: -10px;
+  left: -8px;
+  text-align: center;
+  line-height: 19px;
+  background: #F2F2F2;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-remove:hover {
+  background: #e49696;
+}
+.main-content .displayed-icon-group .icon-showcase > li:hover .icon-remove {
+  display: inline-block;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-snapshot {
+  font-size: 40px;
+  text-align: center;
+  padding: 10px;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-name {
+  text-align: center;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 7px;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect {
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  border-top: 1px solid #e4e4e4;
+  background: #F2F2F2;
+  position: relative;
+  cursor: pointer;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect .icon-collection-list {
+  position: absolute;
+  left: 70px;
+  top: 20px;
+  z-index: 300;
+  width: 150px;
+  background: #ffffff;
+  box-shadow: 2px 3px 5px grey;
+  display: none;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect .icon-collection-list li {
+  border-bottom: 1px solid #F2F2F2;
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  color: #252525;
+  padding: 10px;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect .icon-collection-list li:hover {
+  background: #F2F2F2;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect:hover .icon-collection-list {
+  display: inline-block;
+}
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect:hover,
+.main-content .displayed-icon-group .icon-showcase > li .icon-collect:active {
+  color: #ffffff;
+  background-color: #8fbcce;
+}
+.tip-dialog {
+  animation-duration: 0.5s;
+  display: none;
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  border-radius: 5px;
+  right: 0;
+  text-align: center;
+  min-width: 150px;
+  max-width: 300px;
+  margin: auto;
+  padding: 10px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.isTipOpen {
+  display: inline-block;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

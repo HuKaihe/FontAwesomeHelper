@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Test from './component/Test';
+import App from './component';
 import './index.less';
 
-ReactDOM.render(<Test />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 
