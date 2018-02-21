@@ -33,6 +33,26 @@ class HKHFontAwesomeHelper extends Component {
         activeCode: 'all',
     };
 
+    componentWillMount = () => {
+        const userDataStr = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataStr);
+        if (userData) {
+            this.setState({
+                iconCollections: userData,
+            });
+        }
+    }
+
+    componentDidMount = () => {
+        setInterval(() => {
+            localStorage.setItem('userData', JSON.stringify(this.state.iconCollections));
+            this.setState({
+                isTipOpen: true,
+                tipText: '已将您的收藏保存到本地',
+            });
+        }, 10000);
+    }
+
 
     // 对图标集合的操作
     handleCollectionAdd = (customName, type) => {
@@ -59,9 +79,14 @@ class HKHFontAwesomeHelper extends Component {
             iconCollections: [...pre.iconCollections, newCollection],
             isTipOpen: true,
             tipText: `成功添加图标集【${customName}】`,
-            displayedIconGroups: [newCollection],
-            activeCode: code,
         }));
+
+        if (type) {
+            this.setState({
+                displayedIconGroups: [newCollection],
+                activeCode: code,
+            });
+        }
     }
 
 
@@ -128,17 +153,17 @@ class HKHFontAwesomeHelper extends Component {
     handleIconAdd = (code, iconClassName) => {
         const { iconCollections } = this.state;
         const index = iconCollections.findIndex(item => item.code === code);
-        const { iconClassNames } = iconCollections[index];
+        const { iconClassNames, title } = iconCollections[index];
         if (iconClassNames.indexOf(iconClassName) === -1) {
-            iconClassNames.push(iconClassName);
             this.setState({
                 isTipOpen: true,
-                tipText: `成功添加图标【${iconClassName}】`,
+                tipText: `成功添加图标【${iconClassName}】到【${title}】`,
             });
+            iconClassNames.push(iconClassName);
         } else {
             this.setState({
                 isTipOpen: true,
-                tipText: `已添加图标【${iconClassName}】`,
+                tipText: `【${title}】已存在图标【${iconClassName}】`,
             });
         }
     }
@@ -158,11 +183,11 @@ class HKHFontAwesomeHelper extends Component {
     }
 
     handleIconCopy = (classNameStr) => {
-        clipboard.copy(classNameStr);
         this.setState({
             isTipOpen: true,
-            tipText: '复制成功',
+            tipText: '已复制到剪贴板',
         });
+        clipboard.copy(classNameStr);
     }
 
     handleIconSearch = (event) => {
@@ -210,6 +235,7 @@ class HKHFontAwesomeHelper extends Component {
                     handleIconSearch={this.handleIconSearch}
                 />
                 <MainContent
+                    activeCode={this.state.activeCode}
                     iconCollections={this.state.iconCollections}
                     displayedIconGroups={this.state.displayedIconGroups}
                     handleIconAdd={this.handleIconAdd}
@@ -218,6 +244,9 @@ class HKHFontAwesomeHelper extends Component {
                     handleIconCopy={this.handleIconCopy}
                 />
                 <TipDialog isTipOpen={this.state.isTipOpen} tipText={this.state.tipText} />
+                <div className="to-top" onClick={() => { document.getElementById('main-content').scrollTop = 0; }}>
+                    <i className="fa fa-chevron-up" />
+                </div>
             </div>
         );
     }

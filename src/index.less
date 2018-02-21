@@ -107,16 +107,20 @@ body,
             }
         }
     }
-    .no-new-collection, .no-rename {
-        .add-new-collection, .collection-intro {
+    .no-new-collection,
+    .no-rename {
+        .add-new-collection,
+        .collection-intro {
             display: inline-block;
         }
         .new-collection-form {
             display: none;
         }
     }
-    .new-collection, .rename {
-        .add-new-collection, .collection-intro {
+    .new-collection,
+    .rename {
+        .add-new-collection,
+        .collection-intro {
             display: none;
         }
         .new-collection-form {
@@ -129,25 +133,24 @@ body,
     }
 }
 
+.pop-dialog {
+    animation-duration: 0.5s;
+    display: none;
+    padding: 5px;
+    font-size: 13px;
+    width: 250px;
+    background: #ffffff;
+    box-shadow: 2px 3px 5px grey;
+    position: absolute;
+    z-index: 15;
+    left: 50px;
+    top: 25px;
+    color: @black;
+}
+
 .main-content {
     height: 100%;
     overflow: auto;
-    padding: 10px;
-    .top-block {
-        overflow: hidden;
-        padding: 10px;
-        .site-data {
-            display: none;
-            float: left;
-            font-size: 15px;
-            color: @grayHover;
-        }
-        .quick-search {
-            float: right;
-            width: 400px;
-            font-size: 20px;
-        }
-    }
     .displayed-icon-group {
         animation-duration: 0.5s;
         .group-title {
@@ -257,8 +260,76 @@ body,
     }
 }
 
+.top-block {
+    padding: 10px;
+    position: relative;
+    &:after {
+        display: block;
+        clear: both;
+        content: "";
+        visibility: hidden;
+        height: 0;
+        zoom: 1
+    }
+    .info-module {
+        width: 700px;
+        float: left;
+        .info-module-block {
+            margin-bottom: 5px;
+            overflow: hidden;
+            .top-item {
+                float: left;
+                margin-right: 15px;
+                color: @black;
+                font-size: 12px;
+                i {
+                    font-size: 12px;
+                    margin-right: 5px;
+                    vertical-align: baseline;
+                }
+            }
+        }
+    }
+    .user-module {
+        float: right;
+        font-size: 15px;
+        position: relative;
+        padding: 20px 20px 0 0;
+        .user-info {
+            display: inline-block;
+            .pop-dialog {
+                left: 65px;
+                top: 40px;
+                width: 100px;
+                .sign-out {
+                    font-size: 13px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    i {
+                        margin-right: 15px;
+                    }
+                    &:hover {
+                        color: @blueHover
+                    }
+                }
+            }
+            &:hover .pop-dialog {
+                display: inline-block;
+            }
+        }
+        .operation-btn {
+            margin-left: 20px;
+            font-size: 15px;
+            cursor: pointer;
+            &:hover {
+                color: @blueHover;
+            }
+        }
+    }
+}
+
 .tip-dialog {
-    animation-duration: 0.5s;
+    animation-duration: 0.1s;
     display: none;
     position: absolute;
     bottom: 100px;
@@ -269,11 +340,32 @@ body,
     min-width: 150px;
     max-width: 300px;
     margin: auto;
+    font-size: 12px;
     padding: 10px;
     color: #ffffff;
     background-color: rgba(0, 0, 0, 0.75);
+    &.isTipOpen {
+        display: inline-block;
+    }
 }
 
-.isTipOpen {
-    display: inline-block;
+
+.to-top {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 25px;
+    width: 45px;
+    text-align: center;
+    line-height: 45px;
+    height: 45px;
+    background: @gray;
+    cursor: pointer;
+    &:hover{
+        background: @grayHover;
+    }
+    i {
+        font-size: 25px;
+        color: @white;
+    }
 }

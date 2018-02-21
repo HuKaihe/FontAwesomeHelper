@@ -27,7 +27,7 @@ class TipDialog extends Component {
             this.setState({
                 isTipOpen: false,
             });
-        }, 800);
+        }, 500);
     }
 
     render() {

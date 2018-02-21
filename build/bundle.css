@@ -124,25 +124,23 @@ body *,
 .left-menu .rename .new-collection-input {
   box-shadow: 2px 3px 5px grey;
 }
+.pop-dialog {
+  animation-duration: 0.5s;
+  display: none;
+  padding: 5px;
+  font-size: 13px;
+  width: 250px;
+  background: #ffffff;
+  box-shadow: 2px 3px 5px grey;
+  position: absolute;
+  z-index: 15;
+  left: 50px;
+  top: 25px;
+  color: #252525;
+}
 .main-content {
   height: 100%;
   overflow: auto;
-  padding: 10px;
-}
-.main-content .top-block {
-  overflow: hidden;
-  padding: 10px;
-}
-.main-content .top-block .site-data {
-  display: none;
-  float: left;
-  font-size: 15px;
-  color: #e4e4e4;
-}
-.main-content .top-block .quick-search {
-  float: right;
-  width: 400px;
-  font-size: 20px;
 }
 .main-content .displayed-icon-group {
   animation-duration: 0.5s;
@@ -251,8 +249,75 @@ body *,
   color: #ffffff;
   background-color: #8fbcce;
 }
+.top-block {
+  padding: 10px;
+  position: relative;
+}
+.top-block:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+  zoom: 1;
+}
+.top-block .info-module {
+  width: 700px;
+  float: left;
+}
+.top-block .info-module .info-module-block {
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+.top-block .info-module .info-module-block .top-item {
+  float: left;
+  margin-right: 15px;
+  color: #252525;
+  font-size: 12px;
+}
+.top-block .info-module .info-module-block .top-item i {
+  font-size: 12px;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+.top-block .user-module {
+  float: right;
+  font-size: 15px;
+  position: relative;
+  padding: 20px 20px 0 0;
+}
+.top-block .user-module .user-info {
+  display: inline-block;
+}
+.top-block .user-module .user-info .pop-dialog {
+  left: 65px;
+  top: 40px;
+  width: 100px;
+}
+.top-block .user-module .user-info .pop-dialog .sign-out {
+  font-size: 13px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.top-block .user-module .user-info .pop-dialog .sign-out i {
+  margin-right: 15px;
+}
+.top-block .user-module .user-info .pop-dialog .sign-out:hover {
+  color: #8fbcce;
+}
+.top-block .user-module .user-info:hover .pop-dialog {
+  display: inline-block;
+}
+.top-block .user-module .operation-btn {
+  margin-left: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.top-block .user-module .operation-btn:hover {
+  color: #8fbcce;
+}
 .tip-dialog {
-  animation-duration: 0.5s;
+  animation-duration: 0.1s;
   display: none;
   position: absolute;
   bottom: 100px;
@@ -263,12 +328,32 @@ body *,
   min-width: 150px;
   max-width: 300px;
   margin: auto;
+  font-size: 12px;
   padding: 10px;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.75);
 }
-.isTipOpen {
+.tip-dialog.isTipOpen {
   display: inline-block;
+}
+.to-top {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 25px;
+  width: 45px;
+  text-align: center;
+  line-height: 45px;
+  height: 45px;
+  background: #666666;
+  cursor: pointer;
+}
+.to-top:hover {
+  background: #e4e4e4;
+}
+.to-top i {
+  font-size: 25px;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

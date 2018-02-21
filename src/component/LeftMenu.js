@@ -36,6 +36,9 @@ class LeftMenu extends Component {
         this.setState({
             status: 'new',
         });
+        setTimeout(() => {
+            this.newInput.focus();
+        }, 100);
     }
 
     edit = (event) => {
@@ -175,7 +178,7 @@ class LeftMenu extends Component {
                                         item.renameable &&
                                         <div className="new-collection-form">
                                             <input
-                                                value={this.state.collectionNewName}
+                                                value={this.state.collectionNewName || item.title}
                                                 className="text-input new-collection-input"
                                                 onChange={this.rename}
                                                 onBlur={() => { this.finishRename(item.code); }}
@@ -184,7 +187,6 @@ class LeftMenu extends Component {
                                                         this.finishRename(item.code);
                                                     }
                                                 }}
-                                                placeholder={item.title}
                                             />
                                         </div>
                                     }
@@ -197,6 +199,7 @@ class LeftMenu extends Component {
                         <i className="fa fa-plus add-new-collection" />
                         <div className="new-collection-form">
                             <input
+                                ref={(el) => { this.newInput = el; }}
                                 value={this.state.newCollectionName}
                                 className="text-input new-collection-input"
                                 onChange={this.edit}
@@ -206,7 +209,7 @@ class LeftMenu extends Component {
                                         this.finishEdit();
                                     }
                                 }}
-                                placeholder="新的集合"
+                                placeholder="新的图标集合"
                             />
                         </div>
                     </li>
