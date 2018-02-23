@@ -53,7 +53,7 @@ class MainContent extends Component {
                         <div className="info-module-block">
                             <div className="top-item">
                                 <i className="fa fa-newspaper-o" />
-                                广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱
+                                广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱，恩言收
                             </div>
                         </div>
                         <div className="info-module-block">

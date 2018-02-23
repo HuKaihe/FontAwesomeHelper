@@ -70,6 +70,12 @@ class LeftMenu extends Component {
     }
 
     rename = (event) => {
+        if (event.target.value === '') {
+            this.setState({
+                collectionNewName: ' ',
+            });
+            return;
+        }
         this.setState({
             collectionNewName: event.target.value.slice(0, 15),
         });

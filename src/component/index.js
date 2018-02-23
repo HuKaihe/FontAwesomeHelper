@@ -45,10 +45,13 @@ class HKHFontAwesomeHelper extends Component {
 
     componentDidMount = () => {
         setInterval(() => {
+            if (localStorage.getItem('userData') === JSON.stringify(this.state.iconCollections)) {
+                return;
+            }
             localStorage.setItem('userData', JSON.stringify(this.state.iconCollections));
             this.setState({
                 isTipOpen: true,
-                tipText: '已将您的收藏保存到本地',
+                tipText: '保存成功',
             });
         }, 10000);
     }
