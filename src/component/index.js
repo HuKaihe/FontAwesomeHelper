@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import clipboard from 'clipboard-js';
 import iconSourceData from '../iconSourceData.json';
 import LeftMenu from './LeftMenu';
@@ -8,6 +9,14 @@ import { getRandomString } from '../service';
 
 
 class HKHFontAwesomeHelper extends Component {
+
+    static propTypes = {
+        visitAmount: PropTypes.number,
+    }
+
+    static defaultProps = {
+        visitAmount: 0,
+    }
 
     state = {
         displayedIconGroups: iconSourceData, // 右侧图标内容
@@ -45,10 +54,13 @@ class HKHFontAwesomeHelper extends Component {
 
     componentDidMount = () => {
         setInterval(() => {
+            if (localStorage.getItem('userData') === JSON.stringify(this.state.iconCollections)) {
+                return;
+            }
             localStorage.setItem('userData', JSON.stringify(this.state.iconCollections));
             this.setState({
                 isTipOpen: true,
-                tipText: '已将您的收藏保存到本地',
+                tipText: '保存成功',
             });
         }, 10000);
     }
@@ -242,6 +254,7 @@ class HKHFontAwesomeHelper extends Component {
                     handleIconDelete={this.handleIconDelete}
                     handleCollectionAdd={this.handleCollectionAdd}
                     handleIconCopy={this.handleIconCopy}
+                    visitAmount={this.props.visitAmount}
                 />
                 <TipDialog isTipOpen={this.state.isTipOpen} tipText={this.state.tipText} />
                 <div className="to-top" onClick={() => { document.getElementById('main-content').scrollTop = 0; }}>

@@ -178,7 +178,7 @@ body,
                 cursor: pointer;
                 color: @gray;
                 display: inline-block;
-                width: 130px;
+                width: 100px;
                 margin-right: 10px;
                 margin-top: 20px;
                 border: 1px solid @grayHover;
@@ -239,7 +239,7 @@ body,
                             white-space: nowrap;
                             text-align: center;
                             color: #252525;
-                            padding: 10px;
+                            padding: 5px;
                             &:hover {
                                 background: @lightGray;
                             }
@@ -287,6 +287,11 @@ body,
                     margin-right: 5px;
                     vertical-align: baseline;
                 }
+                a {
+                    color: @blueHover;
+                    text-decoration: none;
+                    margin-left: 5px;
+                }
             }
         }
     }
@@ -301,28 +306,20 @@ body,
                 left: 65px;
                 top: 40px;
                 width: 100px;
-                .sign-out {
-                    font-size: 13px;
-                    font-weight: 300;
-                    cursor: pointer;
-                    i {
-                        margin-right: 15px;
-                    }
-                    &:hover {
-                        color: @blueHover
-                    }
-                }
             }
             &:hover .pop-dialog {
                 display: inline-block;
             }
         }
-        .operation-btn {
-            margin-left: 20px;
-            font-size: 15px;
+        .sign-out {
+            font-size: 13px;
+            font-weight: 300;
             cursor: pointer;
+            i {
+                margin-left: 15px;
+            }
             &:hover {
-                color: @blueHover;
+                color: @blueHover
             }
         }
     }
@@ -357,8 +354,8 @@ body,
     border-radius: 25px;
     width: 45px;
     text-align: center;
-    line-height: 45px;
     height: 45px;
+    padding-top: 7px;
     background: @gray;
     cursor: pointer;
     &:hover{

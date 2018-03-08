@@ -12,6 +12,7 @@ class MainContent extends Component {
         handleCollectionAdd: PropTypes.func,
         handleIconCopy: PropTypes.func,
         activeCode: PropTypes.string,
+        visitAmount: PropTypes.number,
     }
 
     static defaultProps = {
@@ -22,6 +23,7 @@ class MainContent extends Component {
         handleCollectionAdd: () => { },
         handleIconCopy: () => { },
         activeCode: 'all',
+        visitAmount: 0,
     }
 
     state = {}
@@ -39,7 +41,7 @@ class MainContent extends Component {
                         <div className="info-module-block">
                             <div className="top-item">
                                 <i className="fa fa-area-chart" />
-                                访问量：1039029
+                                访问量：{this.props.visitAmount}
                             </div>
                             <div className="top-item">
                                 <i className="fa fa-envelope" />
@@ -53,28 +55,23 @@ class MainContent extends Component {
                         <div className="info-module-block">
                             <div className="top-item">
                                 <i className="fa fa-newspaper-o" />
-                                广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱
+                                广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱，恩言收
                             </div>
                         </div>
                         <div className="info-module-block">
                             <div className="top-item">
                                 <i className="fa fa-laptop" />
-                                声明：本站开源（github搜索：FontAwesomeHelper）、免费；所有图标的版权归fontawesome
+                                声明：本站开源（github搜索：FontAwesomeHelper）、免费；所有图标的版权归
+                                <a href="http://fontawesome.dashgame.com/" target="_blank" rel="noopener noreferrer">fontawesome</a>
                             </div>
                         </div>
                     </div>
                     <div className="user-module">
                         <div className="user-info">
                             欢迎，胡凯赫
-                            <div className="pop-dialog animated fadeInUp">
-                                <button className="sign-out" title="注销">
-                                    <i className="fa fa-sign-out" />
-                                    注销
-                                </button>
-                            </div>
                         </div>
-                        <button className="operation-btn" title="点此手动同步信息到云端">
-                            <i className="fa fa-mixcloud" />
+                        <button className="sign-out" title="注销">
+                            <i className="fa fa-sign-out" />
                         </button>
                     </div>
                 </div>

@@ -4,5 +4,5 @@ import ReactDOM from 'react-dom';
 import App from './component';
 import './index.less';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App visitAmount={visitAmount} />, document.getElementById('app'));
 

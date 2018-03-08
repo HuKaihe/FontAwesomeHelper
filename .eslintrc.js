@@ -20,5 +20,6 @@ module.exports = {
         "react/forbid-prop-types": "off",
         "jsx-a11y/no-autofocus": "off",
         "no-mixed-operators": "off",
-    }
+    },
+    "globals": { "visitAmount": true}
 };

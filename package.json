@@ -1,6 +1,6 @@
 {
   "name": "fontawesomehelper",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "FontAwesomeHelper is a platform devoted to help people find and manage Font Awesome icons easily",
   "main": "index.js",
   "scripts": {
