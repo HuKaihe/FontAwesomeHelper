@@ -4,6 +4,10 @@
 @black: #252525;
 @grayHover: #e4e4e4;
 @blueHover: #8fbcce;
+@blue: #0073c0;
+@pink: #ef8080;
+
+// reset
 button,
 a {
     outline: none;
@@ -17,6 +21,7 @@ ul {
     padding: 0;
 }
 
+// page structure with import
 html,
 body,
 .app,
@@ -32,19 +37,18 @@ body,
     background: @white;
     color: @black;
     font-weight: 300;
-}
-
-.quick-search {
-    padding: 10px 40px;
-    text-align: center;
     position: relative;
-    .search-icon {
-        position: absolute;
-        right: 50px;
-        top: 18px;
+    .page-left {
+        height: 100%;
+        overflow: auto;
     }
+    @import './less/LeftMenu.less';
+    @import './less/TopBar.less';
+    @import './less/MainContent.less';
+    @import './less/Dialog.less';
 }
 
+// common component
 .text-input {
     width: 100%;
     height: 35px;
@@ -52,317 +56,16 @@ body,
     font-weight: 200;
     outline: none;
     border: none;
-}
-
-.left-menu {
-    position: relative;
-    float: left;
-    height: 100%;
-    width: 350px;
-    background-color: @lightGray;
-    overflow: auto;
-    .site-title {
-        padding: 10px;
-        text-align: center;
-        font-size: 25px;
-        .sub-title {
-            font-size: 15px;
-            color: @gray;
-            margin-top: 10px;
-            font-weight: 200;
-        }
-    }
-    .icon-collections {
-        list-style: none;
-        margin: 0;
-        list-style: none;
-        margin: 0;
-        padding: 20px 0;
-        li {
-            position: relative;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 300;
-            .icon {
-                margin-right: 10px;
-            }
-            .remove-collection {
-                display: none;
-                position: absolute;
-                left: 6px;
-                font-size: 13px;
-                bottom: 11px;
-                color: @gray;
-                cursor: pointer;
-            }
-            &:hover,
-            &.active {
-                background: @grayHover;
-                .remove-collection {
-                    display: inline-block;
-                }
-            }
-        }
-    }
-    .no-new-collection,
-    .no-rename {
-        .add-new-collection,
-        .collection-intro {
-            display: inline-block;
-        }
-        .new-collection-form {
-            display: none;
-        }
-    }
-    .new-collection,
-    .rename {
-        .add-new-collection,
-        .collection-intro {
-            display: none;
-        }
-        .new-collection-form {
-            padding: 10px 40px;
-            text-align: center;
-        }
-        .new-collection-input {
-            box-shadow: 2px 3px 5px grey;
-        }
-    }
-}
-
-.pop-dialog {
-    animation-duration: 0.5s;
-    display: none;
-    padding: 5px;
-    font-size: 13px;
-    width: 250px;
-    background: #ffffff;
-    box-shadow: 2px 3px 5px grey;
-    position: absolute;
-    z-index: 15;
-    left: 50px;
-    top: 25px;
-    color: @black;
-}
-
-.main-content {
-    height: 100%;
-    overflow: auto;
-    .displayed-icon-group {
-        animation-duration: 0.5s;
-        .group-title {
-            text-align: center;
-            font-size: 30px;
-            font-weight: 300;
-            margin-top: 30px;
-            .collect-group {
-                border: none;
-                background: transparent;
-                margin-left: 30px;
-                font-size: 30px;
-                outline: none;
-                cursor: pointer;
-                &:hover {
-                    color: @blueHover;
-                }
-            }
-        }
-        .icon-showcase {
-            padding: 10px;
-            margin: 0;
-            text-align: center;
-            >li {
-                cursor: pointer;
-                color: @gray;
-                display: inline-block;
-                width: 100px;
-                margin-right: 10px;
-                margin-top: 20px;
-                border: 1px solid @grayHover;
-                position: relative;
-                .icon-remove {
-                    display: none;
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 10px;
-                    color: #ffffff;
-                    top: -10px;
-                    left: -8px;
-                    text-align: center;
-                    line-height: 19px;
-                    background: @lightGray;
-                    &:hover {
-                        background: rgb(228, 150, 150);
-                    }
-                }
-                &:hover .icon-remove {
-                    display: inline-block
-                }
-                .icon-snapshot {
-                    font-size: 40px;
-                    text-align: center;
-                    padding: 10px
-                }
-                .icon-name {
-                    text-align: center;
-                    font-size: 13px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    padding: 7px
-                }
-                .icon-collect {
-                    text-align: center;
-                    font-size: 20px;
-                    padding: 5px;
-                    border-top: 1px solid @grayHover;
-                    background: @lightGray;
-                    position: relative;
-                    .icon-collection-list {
-                        position: absolute;
-                        left: 70px;
-                        top: 20px;
-                        z-index: 300;
-                        width: 150px;
-                        background: #ffffff;
-                        box-shadow: 2px 3px 5px grey;
-                        display: none;
-                        li {
-                            border-bottom: 1px solid @lightGray;
-                            overflow: hidden;
-                            font-size: 15px;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            text-align: center;
-                            color: #252525;
-                            padding: 5px;
-                            &:hover {
-                                background: @lightGray;
-                            }
-                        }
-                    }
-                    &:hover .icon-collection-list {
-                        display: inline-block;
-                    }
-                    cursor: pointer;
-                    &:hover,
-                    &:active {
-                        color: @white;
-                        background-color: @blueHover;
-                    }
-                }
-            }
-        }
-    }
-}
-
-.top-block {
-    padding: 10px;
-    position: relative;
-    &:after {
-        display: block;
-        clear: both;
-        content: "";
-        visibility: hidden;
-        height: 0;
-        zoom: 1
-    }
-    .info-module {
-        width: 700px;
-        float: left;
-        .info-module-block {
-            margin-bottom: 5px;
-            overflow: hidden;
-            .top-item {
-                float: left;
-                margin-right: 15px;
-                color: @black;
-                font-size: 12px;
-                i {
-                    font-size: 12px;
-                    margin-right: 5px;
-                    vertical-align: baseline;
-                }
-                a {
-                    color: @blueHover;
-                    text-decoration: none;
-                    margin-left: 5px;
-                }
-            }
-        }
-    }
-    .user-module {
-        float: right;
-        font-size: 15px;
-        position: relative;
-        padding: 20px 20px 0 0;
-        .user-info {
-            display: inline-block;
-            .pop-dialog {
-                left: 65px;
-                top: 40px;
-                width: 100px;
-            }
-            &:hover .pop-dialog {
-                display: inline-block;
-            }
-        }
-        .sign-out {
-            font-size: 13px;
-            font-weight: 300;
-            cursor: pointer;
-            i {
-                margin-left: 15px;
-            }
-            &:hover {
-                color: @blueHover
-            }
-        }
-    }
-}
-
-.tip-dialog {
-    animation-duration: 0.1s;
-    display: none;
-    position: absolute;
-    bottom: 100px;
-    left: 0;
-    border-radius: 5px;
-    right: 0;
-    text-align: center;
-    min-width: 150px;
-    max-width: 300px;
-    margin: auto;
-    font-size: 12px;
-    padding: 10px;
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.75);
-    &.isTipOpen {
+    &.small {
+        height: 25px;
+        padding: 5px;
+        border-radius: 3px;
+        margin-right: 5px;
         display: inline-block;
+        width: 120px;
+        border: 1px solid #e4e4e4;
     }
 }
 
 
-.to-top {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    border-radius: 25px;
-    width: 45px;
-    text-align: center;
-    height: 45px;
-    padding-top: 7px;
-    background: @gray;
-    cursor: pointer;
-    &:hover{
-        background: @grayHover;
-    }
-    i {
-        font-size: 25px;
-        color: @white;
-    }
-}
+

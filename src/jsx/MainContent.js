@@ -12,7 +12,6 @@ class MainContent extends Component {
         handleCollectionAdd: PropTypes.func,
         handleIconCopy: PropTypes.func,
         activeCode: PropTypes.string,
-        visitAmount: PropTypes.number,
     }
 
     static defaultProps = {
@@ -23,7 +22,6 @@ class MainContent extends Component {
         handleCollectionAdd: () => { },
         handleIconCopy: () => { },
         activeCode: 'all',
-        visitAmount: 0,
     }
 
     state = {}
@@ -35,46 +33,7 @@ class MainContent extends Component {
         const customCollectionList = iconCollections.filter(item => item.code !== 'all' && item.code !== 'mycollection');
 
         return (
-            <div className="main-content" id="main-content">
-                <div className="top-block">
-                    <div className="info-module">
-                        <div className="info-module-block">
-                            <div className="top-item">
-                                <i className="fa fa-area-chart" />
-                                访问量：{this.props.visitAmount}
-                            </div>
-                            <div className="top-item">
-                                <i className="fa fa-envelope" />
-                                agentKyle@foxmail.com
-                            </div>
-                            <div className="top-item">
-                                <i className="fa fa-book" />
-                                使用说明
-                            </div>
-                        </div>
-                        <div className="info-module-block">
-                            <div className="top-item">
-                                <i className="fa fa-newspaper-o" />
-                                广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱，恩言收
-                            </div>
-                        </div>
-                        <div className="info-module-block">
-                            <div className="top-item">
-                                <i className="fa fa-laptop" />
-                                声明：本站开源（github搜索：FontAwesomeHelper）、免费；所有图标的版权归
-                                <a href="http://fontawesome.dashgame.com/" target="_blank" rel="noopener noreferrer">fontawesome</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="user-module">
-                        <div className="user-info">
-                            欢迎，胡凯赫
-                        </div>
-                        <button className="sign-out" title="注销">
-                            <i className="fa fa-sign-out" />
-                        </button>
-                    </div>
-                </div>
+            <div className="main-content">
                 {
                     displayedIconGroups.map((displayedIconGroup, index) => (
                         <div

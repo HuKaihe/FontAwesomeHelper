@@ -1,4 +1,4 @@
-import App from './src/component/index';
+import App from './src/jsx';
 
-module.exports = App;
+export default App;
 

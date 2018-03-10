@@ -1,0 +1,100 @@
+.tip-dialog {
+    animation-duration: 0.1s;
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    border-radius: 5px;
+    right: 0;
+    text-align: center;
+    min-width: 150px;
+    max-width: 300px;
+    margin: auto;
+    font-size: 12px;
+    padding: 10px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.75);
+    &.isTipOpen {
+        display: inline-block;
+    }
+}
+
+.to-top {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 25px;
+    width: 45px;
+    text-align: center;
+    height: 45px;
+    padding-top: 7px;
+    background: @gray;
+    cursor: pointer;
+    &:hover {
+        background: @grayHover;
+    }
+    i {
+        font-size: 25px;
+        color: @white;
+    }
+}
+
+.signup-dialog {
+    display: none;
+    background: #ffffff;
+    box-shadow: 2px 3px 5px @gray;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    margin: auto;
+    width: 365px;
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center;
+    &.isOpen {
+        display: inline-block;
+    }
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 20px;
+        color: @gray;
+        cursor: pointer;
+        &:hover {
+            color: @pink;
+        }
+    }
+    .text-input {
+        border: 1px solid @lightGray;
+        margin-top: 10px;
+        &.error {
+            border: 1px solid @pink;
+        }
+    }
+    .signup-tip {
+        height: 20px;
+        line-height: 20px;
+        padding-left: 5px;
+        color: @pink;
+        text-align: left;
+        font-size: 12px;
+    }
+    .btn {
+        height: 28px;
+        width: 80px;
+        font-size: 15px;
+        border-radius: 5px;
+        color: #fff;
+        background: @blueHover;
+        margin-top: 20px;
+        font-weight: unset;
+        cursor: pointer;
+        &:hover {
+            background: transparent;
+            border: 1px solid @blueHover;
+            color: @blueHover;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+@gray: #666666;
+@lightGray: #F2F2F2;
+@white: #ffffff;
+@black: #252525;
+@grayHover: #e4e4e4;
+@blueHover: #8fbcce;
+@blue: #0073c0;
+.top-bar {
+    padding: 10px;
+    position: relative;
+    &:after {
+        display: block;
+        clear: both;
+        content: "";
+        visibility: hidden;
+        height: 0;
+        zoom: 1
+    }
+    .info-module {
+        width: 700px;
+        float: left;
+        .info-module-block {
+            margin-bottom: 5px;
+            overflow: hidden;
+            .top-item {
+                float: left;
+                margin-right: 15px;
+                color: @black;
+                font-size: 12px;
+                i {
+                    font-size: 12px;
+                    margin-right: 5px;
+                    vertical-align: baseline;
+                }
+                a {
+                    color: @blueHover;
+                    text-decoration: none;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    .user-module {
+        float: right;
+        font-size: 15px;
+        margin-right: 20px;
+        font-weight: 300;
+        color: @gray;
+        .user-info {
+            display: inline-block;
+        }
+        .btn {
+            color: @blueHover;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .login-tip {
+            font-size: 12px;
+            margin-top: 10px;
+            color: @pink;
+            width: 245px;
+            text-align: right;
+        }
+        .operation {
+            font-size: 16px;
+            font-weight: 300;
+            display: inline-block;
+            cursor: pointer;
+            i {
+                margin-left: 15px;
+            }
+            &:hover {
+                color: @blueHover
+            }
+        }
+    }
+}

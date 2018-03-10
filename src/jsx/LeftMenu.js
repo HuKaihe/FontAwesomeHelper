@@ -125,7 +125,7 @@ class LeftMenu extends Component {
         return (
             <div className="left-menu">
                 <div className="site-title">
-                    HKH FontAwesome Helper
+                        FontAwesome Helper
                     <div className="sub-title">您的FontAwesome图标管理专家</div>
                 </div>
                 <div className="quick-search">
@@ -140,7 +140,7 @@ class LeftMenu extends Component {
                             }
                         }}
                     />
-                    <i className="search-icon fa fa-search" />
+                    <i className="icon fa fa-search" />
                 </div>
                 <ul className="icon-collections" onDrop={() => { this.props.handleCollectionRank(this.newIndex, this.draggingCode); }}>
                     {

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clipboard from 'clipboard-js';
-import iconSourceData from '../iconSourceData.json';
+
 import LeftMenu from './LeftMenu';
 import MainContent from './MainContent';
+import TopBar from './TopBar';
 import TipDialog from './TipDialog';
-import { getRandomString } from '../service';
+import SignupDialog from './SignupDialog';
+import { getRandomString, post } from '../service';
 
+import iconSourceData from '../iconSourceData.json';
+import defaultSchema from '../defaultSchema';
 
 class HKHFontAwesomeHelper extends Component {
 
@@ -20,29 +24,19 @@ class HKHFontAwesomeHelper extends Component {
 
     state = {
         displayedIconGroups: iconSourceData, // 右侧图标内容
-        iconCollections: [ // 我的收藏、通用分类与自定义分类
-            {
-                code: 'all',
-                title: '全部图标',
-                icon: 'fa-tasks',
-                deletable: false,
-                renameable: false,
-            },
-            {
-                code: 'mycollection',
-                title: '我的收藏',
-                icon: 'fa-shopping-cart',
-                iconClassNames: [],
-                deletable: false,
-                renameable: false,
-            },
-        ],
+        iconCollections: defaultSchema,
         isTipOpen: false,
         tipText: '',
         activeCode: 'all',
+        hasLogin: false,
+        isSignupDialogOpen: false,
+        loginFailed: false,
+        username: '',
+        isUsernameNotPass: false,
     };
 
     componentWillMount = () => {
+        // 用户未登录的状态下
         const userDataStr = localStorage.getItem('userData');
         const userData = JSON.parse(userDataStr);
         if (userData) {
@@ -52,19 +46,171 @@ class HKHFontAwesomeHelper extends Component {
         }
     }
 
-    componentDidMount = () => {
-        setInterval(() => {
-            if (localStorage.getItem('userData') === JSON.stringify(this.state.iconCollections)) {
-                return;
-            }
-            localStorage.setItem('userData', JSON.stringify(this.state.iconCollections));
-            this.setState({
-                isTipOpen: true,
-                tipText: '保存成功',
-            });
-        }, 10000);
+    componentDidUpdate = () => {
+        let localInterval;
+        let remoteInterval;
+        // 如果用户登录成功，则同步到云端；否则，只保存到本地
+        if (this.state.hasLogin) {
+            remoteInterval = setInterval(this.asyncRemoteData, 3000);
+            clearInterval(localInterval);
+        } else {
+            localInterval = setInterval(this.asyncLocalData, 3000);
+            clearInterval(remoteInterval);
+        }
     }
 
+    // 通用函数
+    showTip = (tipText) => {
+        this.setState({
+            isTipOpen: true,
+            tipText,
+        });
+    }
+
+    // 用户管理
+    login = (username, password) => {
+        if (!username || !password) {
+            return;
+        }
+
+        post('/login', { username, password })
+            .then(({ data }) => {
+                // 登录失败，显示提示语
+                if (!data.id) {
+                    this.setState({
+                        loginFailed: true,
+                        isSignupDialogOpen: false,
+                    });
+                    return;
+                }
+                const { id, schemastr } = data;
+                const schema = JSON.parse(schemastr);
+                this.setState({
+                    loginFailed: false,
+                    hasLogin: true,
+                    iconCollections: schema,
+                    username,
+                    id,
+                    isUsernameNotPass: false,
+                    isSignupDialogOpen: false,
+                });
+                this.handleCollectionSelect('all');
+            });
+    }
+
+    asyncData = (iconCollectionsStr) => {
+        if (this.state.hasLogin) {
+            post('/asyncData', {
+                schemastr: iconCollectionsStr,
+                id: this.state.id,
+            });
+        }
+    }
+
+    asyncLocalData = () => {
+        if (this.state.hasLogin) {
+            return;
+        }
+        const { iconCollections } = this.state;
+        const iconCollectionsStr = JSON.stringify(iconCollections);
+        if (localStorage.getItem('userData') === iconCollectionsStr) {
+            return;
+        }
+        localStorage.setItem('userData', iconCollectionsStr);
+        this.showTip('保存信息到本地成功');
+    }
+
+    asyncRemoteData = () => {
+        if (!this.state.hasLogin) {
+            return;
+        }
+        const { iconCollections } = this.state;
+        const iconCollectionsStr = JSON.stringify(iconCollections);
+        if (sessionStorage.getItem('userData') === iconCollectionsStr) {
+            return;
+        }
+        this.asyncData(iconCollectionsStr);
+        sessionStorage.setItem('userData', iconCollectionsStr);
+        this.showTip('保存信息到云端成功');
+    }
+
+    openSignupDialog = () => {
+        this.setState({
+            isSignupDialogOpen: true,
+        });
+    }
+
+    closeSignupDialog = () => {
+        this.setState({
+            isSignupDialogOpen: false,
+        });
+    }
+
+    logout = () => {
+        post('/logout').then(({ code }) => {
+            if (code === 200) {
+                const iconCollectionsStr = localStorage.getItem('userData');
+                this.setState({
+                    hasLogin: false,
+                    iconCollections: JSON.parse(iconCollectionsStr),
+                });
+                this.handleCollectionSelect('all');
+            }
+        });
+    }
+
+    upload = () => {
+        if (!this.state.hasLogin) {
+            return;
+        }
+        const iconCollectionsStr = localStorage.getItem('userData');
+        const iconCollections = JSON.parse(iconCollectionsStr);
+        this.asyncData(iconCollectionsStr);
+        sessionStorage.setItem('userData', iconCollectionsStr);
+        this.setState({
+            iconCollections,
+        });
+        this.handleCollectionSelect('all');
+        this.showTip('同步本地信息到云端成功');
+    }
+
+    download = () => {
+        if (!this.state.hasLogin) {
+            return;
+        }
+        const { iconCollections } = this.state;
+        const iconCollectionsStr = JSON.stringify(iconCollections);
+        localStorage.setItem('userData', iconCollectionsStr);
+        this.showTip('同步云端信息到本地成功');
+    }
+
+    signup = (username, password, email) => {
+        post('/signup', {
+            username,
+            password,
+            email,
+            schemastr: JSON.stringify(defaultSchema),
+        }).then(({ code, data }) => {
+            // 登录失败，显示提示语
+            if (code === 400) {
+                this.setState({
+                    isUsernameNotPass: true,
+                });
+                return;
+            }
+            const { id } = data;
+            this.setState({
+                loginFailed: false,
+                hasLogin: true,
+                iconCollections: defaultSchema,
+                isSignupDialogOpen: false,
+                isUsernameNotPass: false,
+                username,
+                id,
+            });
+            this.handleCollectionSelect('all');
+        });
+    }
 
     // 对图标集合的操作
     handleCollectionAdd = (customName, type) => {
@@ -246,20 +392,38 @@ class HKHFontAwesomeHelper extends Component {
                     handleCollectionRank={this.handleCollectionRank}
                     handleIconSearch={this.handleIconSearch}
                 />
-                <MainContent
-                    activeCode={this.state.activeCode}
-                    iconCollections={this.state.iconCollections}
-                    displayedIconGroups={this.state.displayedIconGroups}
-                    handleIconAdd={this.handleIconAdd}
-                    handleIconDelete={this.handleIconDelete}
-                    handleCollectionAdd={this.handleCollectionAdd}
-                    handleIconCopy={this.handleIconCopy}
-                    visitAmount={this.props.visitAmount}
-                />
+                <div className="page-left" id="page-left">
+                    <TopBar
+                        visitAmount={this.props.visitAmount}
+                        myname={this.state.username}
+                        hasLogin={this.state.hasLogin}
+                        loginFailed={this.state.loginFailed}
+                        openSignupDialog={this.openSignupDialog}
+                        upload={this.upload}
+                        download={this.download}
+                        login={this.login}
+                        logout={this.logout}
+                    />
+                    <MainContent
+                        activeCode={this.state.activeCode}
+                        iconCollections={this.state.iconCollections}
+                        displayedIconGroups={this.state.displayedIconGroups}
+                        handleIconAdd={this.handleIconAdd}
+                        handleIconDelete={this.handleIconDelete}
+                        handleCollectionAdd={this.handleCollectionAdd}
+                        handleIconCopy={this.handleIconCopy}
+                    />
+                </div>
                 <TipDialog isTipOpen={this.state.isTipOpen} tipText={this.state.tipText} />
-                <div className="to-top" onClick={() => { document.getElementById('main-content').scrollTop = 0; }}>
+                <div className="to-top" onClick={() => { document.getElementById('page-left').scrollTop = 0; }}>
                     <i className="fa fa-chevron-up" />
                 </div>
+                <SignupDialog
+                    isSignupDialogOpen={this.state.isSignupDialogOpen}
+                    closeSignupDialog={this.closeSignupDialog}
+                    signup={this.signup}
+                    isUsernameNotPass={this.state.isUsernameNotPass}
+                />
             </div>
         );
     }

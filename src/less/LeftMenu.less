@@ -1,0 +1,89 @@
+.left-menu {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 350px;
+    background-color: @lightGray;
+    overflow: auto;
+    .site-title {
+        padding: 10px;
+        text-align: center;
+        font-size: 25px;
+        .sub-title {
+            font-size: 15px;
+            color: @gray;
+            margin-top: 10px;
+            font-weight: 200;
+        }
+    }
+    .quick-search {
+        padding: 10px 40px;
+        text-align: center;
+        position: relative;
+        display: block;
+        .icon {
+            position: absolute;
+            right: 50px;
+            top: 18px;
+        }
+    }
+    .icon-collections {
+        list-style: none;
+        margin: 0;
+        list-style: none;
+        margin: 0;
+        padding: 20px 0;
+        li {
+            position: relative;
+            height: 40px;
+            padding-top: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 300;
+            .icon {
+                margin-right: 10px;
+            }
+            .remove-collection {
+                display: none;
+                position: absolute;
+                left: 6px;
+                font-size: 13px;
+                bottom: 11px;
+                color: @gray;
+                cursor: pointer;
+            }
+            &:hover,
+            &.active {
+                background: @grayHover;
+                .remove-collection {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .no-new-collection,
+    .no-rename {
+        .add-new-collection,
+        .collection-intro {
+            display: inline-block;
+        }
+        .new-collection-form {
+            display: none;
+        }
+    }
+    .new-collection,
+    .rename {
+        .add-new-collection,
+        .collection-intro {
+            display: none;
+        }
+        .new-collection-form {
+            padding: 5px 40px;
+            text-align: center;
+        }
+        .new-collection-input {
+            box-shadow: 2px 3px 5px grey;
+        }
+    }
+}
