@@ -61,6 +61,7 @@ class TopBar extends Component {
         return (
             <div className="top-bar">
                 <div className="info-module">
+                    <img src="http://localhost:7001/public/image/logo.png" alt="hkh logo" className="logo" />
                     <div className="info-module-block">
                         <div className="top-item">
                             <i className="fa fa-area-chart" />
@@ -77,6 +78,12 @@ class TopBar extends Component {
                     </div>
                     <div className="info-module-block">
                         <div className="top-item">
+                            <i className="fa fa-bank" />
+                            备案号：冀ICP备18005603号
+                        </div>
+                    </div>
+                    <div className="info-module-block">
+                        <div className="top-item">
                             <i className="fa fa-newspaper-o" />
                             广告：阿里巴巴国际站前端团队招聘，有意者请将简历投到我邮箱，恩言收
                         </div>
@@ -84,7 +91,7 @@ class TopBar extends Component {
                     <div className="info-module-block">
                         <div className="top-item">
                             <i className="fa fa-laptop" />
-                            声明：本站开源（github搜索：<a href="https://github.com/HuKaihe/FontAwesomeHelper" target="_blank" rel="noopener noreferrer">FontAwesomeHelper</a>）、免费；所有图标的版权归
+                            声明：本站已开源（<a href="https://github.com/HuKaihe/FontAwesomeHelper" target="_blank" rel="noopener noreferrer">FontAwesomeHelper </a>），所有图标的版权归
                             <a href="http://fontawesome.dashgame.com/" target="_blank" rel="noopener noreferrer">fontawesome</a>
                         </div>
                     </div>
