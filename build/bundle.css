@@ -95,7 +95,7 @@ body .left-menu .icon-collections li,
 .container .left-menu .icon-collections li {
   position: relative;
   height: 40px;
-  line-height: 40px;
+  padding-top: 10px;
   text-align: center;
   cursor: pointer;
   font-size: 15px;
@@ -193,7 +193,7 @@ html .left-menu .rename .new-collection-form,
 body .left-menu .rename .new-collection-form,
 .app .left-menu .rename .new-collection-form,
 .container .left-menu .rename .new-collection-form {
-  padding: 10px 40px;
+  padding: 5px 40px;
   text-align: center;
 }
 html .left-menu .new-collection .new-collection-input,
@@ -270,6 +270,8 @@ body .top-bar .user-module,
   float: right;
   font-size: 15px;
   margin-right: 20px;
+  font-weight: 300;
+  color: #666666;
 }
 html .top-bar .user-module .user-info,
 body .top-bar .user-module .user-info,
@@ -284,6 +286,12 @@ body .top-bar .user-module .btn,
   color: #8fbcce;
   cursor: pointer;
 }
+html .top-bar .user-module .btn:hover,
+body .top-bar .user-module .btn:hover,
+.app .top-bar .user-module .btn:hover,
+.container .top-bar .user-module .btn:hover {
+  text-decoration: underline;
+}
 html .top-bar .user-module .login-tip,
 body .top-bar .user-module .login-tip,
 .app .top-bar .user-module .login-tip,
@@ -294,25 +302,25 @@ body .top-bar .user-module .login-tip,
   width: 245px;
   text-align: right;
 }
-html .top-bar .user-module .sign-out,
-body .top-bar .user-module .sign-out,
-.app .top-bar .user-module .sign-out,
-.container .top-bar .user-module .sign-out {
-  font-size: 13px;
+html .top-bar .user-module .operation,
+body .top-bar .user-module .operation,
+.app .top-bar .user-module .operation,
+.container .top-bar .user-module .operation {
+  font-size: 16px;
   font-weight: 300;
   display: inline-block;
   cursor: pointer;
 }
-html .top-bar .user-module .sign-out i,
-body .top-bar .user-module .sign-out i,
-.app .top-bar .user-module .sign-out i,
-.container .top-bar .user-module .sign-out i {
+html .top-bar .user-module .operation i,
+body .top-bar .user-module .operation i,
+.app .top-bar .user-module .operation i,
+.container .top-bar .user-module .operation i {
   margin-left: 15px;
 }
-html .top-bar .user-module .sign-out:hover,
-body .top-bar .user-module .sign-out:hover,
-.app .top-bar .user-module .sign-out:hover,
-.container .top-bar .user-module .sign-out:hover {
+html .top-bar .user-module .operation:hover,
+body .top-bar .user-module .operation:hover,
+.app .top-bar .user-module .operation:hover,
+.container .top-bar .user-module .operation:hover {
   color: #8fbcce;
 }
 html .displayed-icon-group,
@@ -362,7 +370,7 @@ body .displayed-icon-group .icon-showcase > li,
   cursor: pointer;
   color: #666666;
   display: inline-block;
-  width: 100px;
+  width: 90px;
   margin-right: 10px;
   margin-top: 20px;
   border: 1px solid #e4e4e4;
@@ -376,6 +384,7 @@ body .displayed-icon-group .icon-showcase > li .icon-remove,
   position: absolute;
   width: 20px;
   height: 20px;
+  padding-top: 1px;
   border-radius: 10px;
   color: #ffffff;
   top: -10px;
@@ -400,7 +409,7 @@ html .displayed-icon-group .icon-showcase > li .icon-snapshot,
 body .displayed-icon-group .icon-showcase > li .icon-snapshot,
 .app .displayed-icon-group .icon-showcase > li .icon-snapshot,
 .container .displayed-icon-group .icon-showcase > li .icon-snapshot {
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
   padding: 10px;
 }
@@ -409,7 +418,7 @@ body .displayed-icon-group .icon-showcase > li .icon-name,
 .app .displayed-icon-group .icon-showcase > li .icon-name,
 .container .displayed-icon-group .icon-showcase > li .icon-name {
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -435,7 +444,7 @@ body .displayed-icon-group .icon-showcase > li .icon-collect .icon-collection-li
   left: 70px;
   top: 20px;
   z-index: 300;
-  width: 150px;
+  width: 130px;
   background: #ffffff;
   box-shadow: 2px 3px 5px grey;
   display: none;
@@ -476,24 +485,10 @@ body .displayed-icon-group .icon-showcase > li .icon-collect:active,
   color: #ffffff;
   background-color: #8fbcce;
 }
-.text-input {
-  width: 100%;
-  height: 35px;
-  padding: 10px;
-  font-weight: 200;
-  outline: none;
-  border: none;
-}
-.text-input.small {
-  height: 25px;
-  padding: 5px;
-  border-radius: 3px;
-  margin-right: 5px;
-  display: inline-block;
-  width: 120px;
-  border: 1px solid #e4e4e4;
-}
-.tip-dialog {
+html .tip-dialog,
+body .tip-dialog,
+.app .tip-dialog,
+.container .tip-dialog {
   animation-duration: 0.1s;
   display: none;
   position: absolute;
@@ -510,10 +505,16 @@ body .displayed-icon-group .icon-showcase > li .icon-collect:active,
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.75);
 }
-.tip-dialog.isTipOpen {
+html .tip-dialog.isTipOpen,
+body .tip-dialog.isTipOpen,
+.app .tip-dialog.isTipOpen,
+.container .tip-dialog.isTipOpen {
   display: inline-block;
 }
-.to-top {
+html .to-top,
+body .to-top,
+.app .to-top,
+.container .to-top {
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -525,16 +526,26 @@ body .displayed-icon-group .icon-showcase > li .icon-collect:active,
   background: #666666;
   cursor: pointer;
 }
-.to-top:hover {
+html .to-top:hover,
+body .to-top:hover,
+.app .to-top:hover,
+.container .to-top:hover {
   background: #e4e4e4;
 }
-.to-top i {
+html .to-top i,
+body .to-top i,
+.app .to-top i,
+.container .to-top i {
   font-size: 25px;
   color: #ffffff;
 }
-.signup-dialog {
+html .signup-dialog,
+body .signup-dialog,
+.app .signup-dialog,
+.container .signup-dialog {
+  display: none;
   background: #ffffff;
-  box-shadow: 2px 3px 5px grey;
+  box-shadow: 2px 3px 5px #666666;
   position: absolute;
   left: 0;
   right: 0;
@@ -545,24 +556,91 @@ body .displayed-icon-group .icon-showcase > li .icon-collect:active,
   border-radius: 5px;
   text-align: center;
 }
-.signup-dialog .text-input {
+html .signup-dialog.isOpen,
+body .signup-dialog.isOpen,
+.app .signup-dialog.isOpen,
+.container .signup-dialog.isOpen {
+  display: inline-block;
+}
+html .signup-dialog .close,
+body .signup-dialog .close,
+.app .signup-dialog .close,
+.container .signup-dialog .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: #666666;
+  cursor: pointer;
+}
+html .signup-dialog .close:hover,
+body .signup-dialog .close:hover,
+.app .signup-dialog .close:hover,
+.container .signup-dialog .close:hover {
+  color: #ef8080;
+}
+html .signup-dialog .text-input,
+body .signup-dialog .text-input,
+.app .signup-dialog .text-input,
+.container .signup-dialog .text-input {
   border: 1px solid #F2F2F2;
   margin-top: 10px;
 }
-.signup-dialog .btn {
+html .signup-dialog .text-input.error,
+body .signup-dialog .text-input.error,
+.app .signup-dialog .text-input.error,
+.container .signup-dialog .text-input.error {
+  border: 1px solid #ef8080;
+}
+html .signup-dialog .signup-tip,
+body .signup-dialog .signup-tip,
+.app .signup-dialog .signup-tip,
+.container .signup-dialog .signup-tip {
+  height: 20px;
+  line-height: 20px;
+  padding-left: 5px;
+  color: #ef8080;
+  text-align: left;
+  font-size: 12px;
+}
+html .signup-dialog .btn,
+body .signup-dialog .btn,
+.app .signup-dialog .btn,
+.container .signup-dialog .btn {
   height: 28px;
   width: 80px;
   font-size: 15px;
   border-radius: 5px;
   color: #fff;
-  background: #0073c0;
+  background: #8fbcce;
   margin-top: 20px;
   font-weight: unset;
-  line-height: 28px;
   cursor: pointer;
 }
-.signup-dialog .btn:hover {
-  background: #8fbcce;
+html .signup-dialog .btn:hover,
+body .signup-dialog .btn:hover,
+.app .signup-dialog .btn:hover,
+.container .signup-dialog .btn:hover {
+  background: transparent;
+  border: 1px solid #8fbcce;
+  color: #8fbcce;
+}
+.text-input {
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  font-weight: 200;
+  outline: none;
+  border: none;
+}
+.text-input.small {
+  height: 25px;
+  padding: 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+  display: inline-block;
+  width: 120px;
+  border: 1px solid #e4e4e4;
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

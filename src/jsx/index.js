@@ -36,7 +36,20 @@ class HKHFontAwesomeHelper extends Component {
     };
 
     componentWillMount = () => {
-        // 用户未登录的状态下
+
+        // 用户在登录的状态下，获取从服务器渲染得到的myData
+        if (window.myData.id) {
+            const { username, schemastr, id } = window.myData;
+            this.setState({
+                hasLogin: true,
+                iconCollections: JSON.parse(schemastr),
+                username,
+                id,
+            });
+            return;
+        }
+
+        // 用户未登录的状态下，获取存储在本地的userData
         const userDataStr = localStorage.getItem('userData');
         const userData = JSON.parse(userDataStr);
         if (userData) {
@@ -117,7 +130,7 @@ class HKHFontAwesomeHelper extends Component {
             return;
         }
         localStorage.setItem('userData', iconCollectionsStr);
-        this.showTip('保存信息到本地成功');
+        // this.showTip('保存信息到本地成功');
     }
 
     asyncRemoteData = () => {
@@ -131,7 +144,7 @@ class HKHFontAwesomeHelper extends Component {
         }
         this.asyncData(iconCollectionsStr);
         sessionStorage.setItem('userData', iconCollectionsStr);
-        this.showTip('保存信息到云端成功');
+        // this.showTip('保存信息到云端成功');
     }
 
     openSignupDialog = () => {
@@ -239,12 +252,12 @@ class HKHFontAwesomeHelper extends Component {
             tipText: `成功添加图标集【${customName}】`,
         }));
 
-        if (type) {
-            this.setState({
-                displayedIconGroups: [newCollection],
-                activeCode: code,
-            });
-        }
+        // if (type) {
+        //     this.setState({
+        //         displayedIconGroups: [newCollection],
+        //         activeCode: code,
+        //     });
+        // }
     }
 
 
