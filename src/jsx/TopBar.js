@@ -73,7 +73,7 @@ class TopBar extends Component {
                         </div>
                         <div className="top-item">
                             <i className="fa fa-book" />
-                            使用说明
+                            <a href="https://hukaihe.gitbooks.io/fontawesome/content/" target="_blank" rel="noopener noreferrer">使用说明</a>
                         </div>
                     </div>
                     <div className="info-module-block">
@@ -91,7 +91,11 @@ class TopBar extends Component {
                     <div className="info-module-block">
                         <div className="top-item">
                             <i className="fa fa-laptop" />
-                            声明：本站已开源（<a href="https://github.com/HuKaihe/FontAwesomeHelper" target="_blank" rel="noopener noreferrer">FontAwesomeHelper </a>），所有图标的版权归
+                            声明：本站已开源（
+                            <a href="https://github.com/HuKaihe/FontAwesomeHelper" target="_blank" rel="noopener noreferrer">
+                                FontAwesomeHelper
+                            </a>
+                            ），所有图标的版权归
                             <a href="http://fontawesome.dashgame.com/" target="_blank" rel="noopener noreferrer">fontawesome</a>
                         </div>
                     </div>

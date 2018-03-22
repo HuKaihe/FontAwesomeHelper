@@ -29,7 +29,7 @@ class SignupDialog extends Component {
 
     setUsername = (event) => {
         this.setState({
-            username: event.target.value.slice(0, 8),
+            username: event.target.value.slice(0, 20),
         });
     }
 

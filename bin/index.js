@@ -7,7 +7,6 @@ const $ = cheerio.load(html);
 const result = [];
 
 $('.container div .mainParts').each((index, el) => {
-
   const code = $(el).attr('id');
   const title = $(el).find('.page-header').text().toString();
   const iconClassNames = [];

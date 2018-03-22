@@ -176,6 +176,9 @@ class HKHFontAwesomeHelper extends Component {
         if (!this.state.hasLogin) {
             return;
         }
+        if (!window.confirm('这是一个非常危险的操作，它会使你账号存储在云端的数据完全被本地覆盖，且不可撤销，你确定要这样做吗？')) {
+            return;
+        }
         const iconCollectionsStr = localStorage.getItem('userData');
         const iconCollections = JSON.parse(iconCollectionsStr);
         this.asyncData(iconCollectionsStr);
@@ -189,6 +192,9 @@ class HKHFontAwesomeHelper extends Component {
 
     download = () => {
         if (!this.state.hasLogin) {
+            return;
+        }
+        if (!window.confirm('这是一个非常危险的操作，它会使你本地的数据完全被云端的数据覆盖，且是不可撤销的，你确定要这样做吗？')) {
             return;
         }
         const { iconCollections } = this.state;
@@ -382,7 +388,7 @@ class HKHFontAwesomeHelper extends Component {
 
         this.setState({
             displayedIconGroups: [{
-                iconClassNames: result,
+                iconClassNames: [...new Set(result)],
                 title: '查找结果',
                 code: 'search',
             }],
