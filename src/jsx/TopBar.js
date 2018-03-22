@@ -61,7 +61,7 @@ class TopBar extends Component {
         return (
             <div className="top-bar">
                 <div className="info-module">
-                    <img src="http://localhost:7001/public/image/logo.png" alt="hkh logo" className="logo" />
+                    <img src="/public/image/logo.png" alt="hkh logo" className="logo" />
                     <div className="info-module-block">
                         <div className="top-item">
                             <i className="fa fa-area-chart" />
@@ -73,7 +73,7 @@ class TopBar extends Component {
                         </div>
                         <div className="top-item">
                             <i className="fa fa-book" />
-                            <a href="https://hukaihe.gitbooks.io/fontawesome/content/" target="_blank" rel="noopener noreferrer">使用说明</a>
+                            <a href="https://www.jianshu.com/p/59837ed1d10d" target="_blank" rel="noopener noreferrer">使用说明</a>
                         </div>
                     </div>
                     <div className="info-module-block">
