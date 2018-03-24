@@ -10,7 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
     },
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     devServer: {
         contentBase: './build',
     },

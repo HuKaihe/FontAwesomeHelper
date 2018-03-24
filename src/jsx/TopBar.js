@@ -61,7 +61,7 @@ class TopBar extends Component {
         return (
             <div className="top-bar">
                 <div className="info-module">
-                    <img src="/public/image/logo.png" alt="hkh logo" className="logo" />
+                    <img src="http://fontawesome.hukaihe.com/public/image/logo.png" alt="hkh logo" className="logo" />
                     <div className="info-module-block">
                         <div className="top-item">
                             <i className="fa fa-area-chart" />

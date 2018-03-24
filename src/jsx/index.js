@@ -5,7 +5,6 @@ import clipboard from 'clipboard-js';
 import LeftMenu from './LeftMenu';
 import MainContent from './MainContent';
 import TopBar from './TopBar';
-import TipDialog from './TipDialog';
 import SignupDialog from './SignupDialog';
 import { getRandomString, post } from '../service';
 
@@ -25,8 +24,6 @@ class HKHFontAwesomeHelper extends Component {
     state = {
         displayedIconGroups: iconSourceData, // 右侧图标内容
         iconCollections: defaultSchema,
-        isTipOpen: false,
-        tipText: '',
         activeCode: 'all',
         hasLogin: false,
         isSignupDialogOpen: false,
@@ -72,12 +69,9 @@ class HKHFontAwesomeHelper extends Component {
         }
     }
 
-    // 通用函数
-    showTip = (tipText) => {
-        this.setState({
-            isTipOpen: true,
-            tipText,
-        });
+    // 提示函数
+    showTip = (tipText, time) => {
+        window.layer.msg(tipText, { time: time || 500 });
     }
 
     // 用户管理
@@ -168,6 +162,7 @@ class HKHFontAwesomeHelper extends Component {
                     iconCollections: JSON.parse(iconCollectionsStr),
                 });
                 this.handleCollectionSelect('all');
+                this.showTip('注销成功', 1000);
             }
         });
     }
@@ -176,31 +171,35 @@ class HKHFontAwesomeHelper extends Component {
         if (!this.state.hasLogin) {
             return;
         }
-        if (!window.confirm('这是一个非常危险的操作，它会使你账号存储在云端的数据完全被本地覆盖，且不可撤销，你确定要这样做吗？')) {
-            return;
-        }
-        const iconCollectionsStr = localStorage.getItem('userData');
-        const iconCollections = JSON.parse(iconCollectionsStr);
-        this.asyncData(iconCollectionsStr);
-        sessionStorage.setItem('userData', iconCollectionsStr);
-        this.setState({
-            iconCollections,
-        });
-        this.handleCollectionSelect('all');
-        this.showTip('同步本地信息到云端成功');
+        window.layer.confirm('这是一个非常危险的操作，它会使你账号存储在【云端的数据】完全被【本地】覆盖，且不可撤销，你确定要这样做吗？', {
+            title: '操作须知',
+            btn: ['确定', '取消'], // 按钮
+        }, () => {
+            const iconCollectionsStr = localStorage.getItem('userData');
+            const iconCollections = JSON.parse(iconCollectionsStr);
+            this.asyncData(iconCollectionsStr);
+            sessionStorage.setItem('userData', iconCollectionsStr);
+            this.setState({
+                iconCollections,
+            });
+            this.handleCollectionSelect('all');
+            this.showTip('同步本地信息到云端成功', 1000);
+        }, () => null);
     }
 
     download = () => {
         if (!this.state.hasLogin) {
             return;
         }
-        if (!window.confirm('这是一个非常危险的操作，它会使你本地的数据完全被云端的数据覆盖，且是不可撤销的，你确定要这样做吗？')) {
-            return;
-        }
-        const { iconCollections } = this.state;
-        const iconCollectionsStr = JSON.stringify(iconCollections);
-        localStorage.setItem('userData', iconCollectionsStr);
-        this.showTip('同步云端信息到本地成功');
+        window.layer.confirm('这是一个非常危险的操作，它会使你【本地的数据】完全被【云端的数据】覆盖，且是不可撤销的，你确定要这样做吗？', {
+            title: '操作须知',
+            btn: ['确定', '取消'], // 按钮
+        }, () => {
+            const { iconCollections } = this.state;
+            const iconCollectionsStr = JSON.stringify(iconCollections);
+            localStorage.setItem('userData', iconCollectionsStr);
+            this.showTip('同步云端信息到本地成功', 1000);
+        }, () => null);
     }
 
     signup = (username, password, email) => {
@@ -254,10 +253,9 @@ class HKHFontAwesomeHelper extends Component {
 
         this.setState(pre => ({
             iconCollections: [...pre.iconCollections, newCollection],
-            isTipOpen: true,
-            tipText: `成功添加图标集【${customName}】`,
         }));
 
+        this.showTip('图标集合添加成功');
         // if (type) {
         //     this.setState({
         //         displayedIconGroups: [newCollection],
@@ -273,7 +271,6 @@ class HKHFontAwesomeHelper extends Component {
             this.setState({
                 displayedIconGroups: iconSourceData,
                 activeCode: 'all',
-                isTipOpen: false,
             });
             return;
         }
@@ -282,7 +279,6 @@ class HKHFontAwesomeHelper extends Component {
         const iconCollection = iconCollections.find(item => item.code === code);
         this.setState({
             displayedIconGroups: [iconCollection],
-            isTipOpen: false,
             activeCode: code,
         });
     }
@@ -291,16 +287,21 @@ class HKHFontAwesomeHelper extends Component {
         const { iconCollections } = this.state;
         const index = iconCollections.findIndex(item => item.code === code);
         const collectionName = iconCollections[index].title;
-        iconCollections.splice(index, 1);
-        if (this.state.activeCode === code) {
+        window.layer.confirm(`确定要删除集合【${collectionName}】吗？`, {
+            title: '请确认',
+            btn: ['确定', '取消'], // 按钮
+        }, () => {
+            iconCollections.splice(index, 1);
+            this.showTip(`成功删除图标集【${collectionName}】`, 1000);
             this.setState({
-                displayedIconGroups: iconSourceData,
+                iconCollections,
             });
-        }
-        this.setState({
-            isTipOpen: true,
-            tipText: `成功删除图标集【${collectionName}】`,
-        });
+            if (this.state.activeCode === code) {
+                this.setState({
+                    displayedIconGroups: iconSourceData,
+                });
+            }
+        }, () => null);
     }
 
     handleCollectionRename = (newName, code) => {
@@ -309,9 +310,8 @@ class HKHFontAwesomeHelper extends Component {
         iconCollection.title = newName;
         this.setState({
             displayedIconGroups: [iconCollection],
-            isTipOpen: true,
-            tipText: '名称修改成功',
         });
+        this.showTip('修改名称成功');
     }
 
     handleCollectionRank = (newIndex, code) => {
@@ -320,29 +320,26 @@ class HKHFontAwesomeHelper extends Component {
         const iconCollection = iconCollections.find(item => item.code === code);
         iconCollections.splice(index, 1);
         iconCollections.splice(newIndex, 0, iconCollection);
+        this.showTip('修改顺序成功');
         this.setState({
-            isTipOpen: true,
-            tipText: '顺序修改成功',
+            iconCollections,
         });
     }
 
     // 对图标的操作
     handleIconAdd = (code, iconClassName) => {
+        const d1 = new Date().getTime();
         const { iconCollections } = this.state;
         const index = iconCollections.findIndex(item => item.code === code);
         const { iconClassNames, title } = iconCollections[index];
         if (iconClassNames.indexOf(iconClassName) === -1) {
-            this.setState({
-                isTipOpen: true,
-                tipText: `成功添加图标【${iconClassName}】到【${title}】`,
-            });
+            this.showTip(`<i class="fa fa-smile-o"></i> 成功添加图标【${iconClassName}】到【${title}】`);
             iconClassNames.push(iconClassName);
         } else {
-            this.setState({
-                isTipOpen: true,
-                tipText: `【${title}】已存在图标【${iconClassName}】`,
-            });
+            this.showTip(`<i class="fa fa-close"></i> 【${title}】已存在图标【${iconClassName}】`);
         }
+        const d2 = new Date().getTime();
+        console.log(`耗时${d2 - d1}ms`);
     }
 
     handleIconDelete = (code, iconClassName) => {
@@ -354,16 +351,11 @@ class HKHFontAwesomeHelper extends Component {
         iconCollections[index].iconClassNames = iconCollections[index].iconClassNames.filter(item => item !== iconClassName);
         this.setState({
             displayedIconGroups: [iconCollections[index]],
-            isTipOpen: true,
-            tipText: `成功删除图标【${iconClassName}】`,
         });
     }
 
     handleIconCopy = (classNameStr) => {
-        this.setState({
-            isTipOpen: true,
-            tipText: '已复制到剪贴板',
-        });
+        this.showTip('已复制到剪贴板');
         clipboard.copy(classNameStr);
     }
 
@@ -393,7 +385,6 @@ class HKHFontAwesomeHelper extends Component {
                 code: 'search',
             }],
             activeCode: 'all',
-            isTipOpen: false,
         });
     }
 
@@ -433,7 +424,6 @@ class HKHFontAwesomeHelper extends Component {
                         handleIconCopy={this.handleIconCopy}
                     />
                 </div>
-                <TipDialog isTipOpen={this.state.isTipOpen} tipText={this.state.tipText} />
                 <div className="to-top" onClick={() => { document.getElementById('page-left').scrollTop = 0; }}>
                     <i className="fa fa-chevron-up" />
                 </div>
