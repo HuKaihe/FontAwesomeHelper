@@ -269,8 +269,15 @@ class HKHFontAwesomeHelper extends Component {
 
         if (code === 'all') {
             this.setState({
-                displayedIconGroups: iconSourceData,
+                displayedIconGroups: [iconSourceData[0]],
                 activeCode: 'all',
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        displayedIconGroups: iconSourceData,
+                        activeCode: 'all',
+                    });
+                }, 500);
             });
             return;
         }
@@ -328,7 +335,6 @@ class HKHFontAwesomeHelper extends Component {
 
     // 对图标的操作
     handleIconAdd = (code, iconClassName) => {
-        const d1 = new Date().getTime();
         const { iconCollections } = this.state;
         const index = iconCollections.findIndex(item => item.code === code);
         const { iconClassNames, title } = iconCollections[index];
@@ -338,8 +344,6 @@ class HKHFontAwesomeHelper extends Component {
         } else {
             this.showTip(`<i class="fa fa-close"></i> 【${title}】已存在图标【${iconClassName}】`);
         }
-        const d2 = new Date().getTime();
-        console.log(`耗时${d2 - d1}ms`);
     }
 
     handleIconDelete = (code, iconClassName) => {
