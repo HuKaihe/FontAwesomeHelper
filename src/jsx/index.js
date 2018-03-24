@@ -267,15 +267,20 @@ class HKHFontAwesomeHelper extends Component {
 
     handleCollectionSelect = (code) => {
 
+        if (code === this.state.activeCode) {
+            return;
+        }
         if (code === 'all') {
             this.setState({
                 displayedIconGroups: [iconSourceData[0]],
                 activeCode: 'all',
             }, () => {
                 setTimeout(() => {
+                    if (this.state.activeCode !== 'all') {
+                        return;
+                    }
                     this.setState({
                         displayedIconGroups: iconSourceData,
-                        activeCode: 'all',
                     });
                 }, 500);
             });
