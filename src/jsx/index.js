@@ -378,7 +378,7 @@ class HKHFontAwesomeHelper extends Component {
         }
 
 
-        const reg = new RegExp(content, 'g');
+        const reg = new RegExp(content);
         let result = [];
 
 
